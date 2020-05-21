@@ -12,9 +12,8 @@
 
 
 container_id=$(sudo docker ps | grep "memleaks" | awk '{ print $1 }')
-echo $container_id
 while true 
 do
     `sudo docker stats ${container_id} | awk '{ print $4 }'` >  temp.txt
-     sleep 2s
+     break
 done
