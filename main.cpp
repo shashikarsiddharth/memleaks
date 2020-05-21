@@ -8,7 +8,7 @@ void leak_mem(){
 
 int main(){
     while(true){
-        cout << "Simulating memory leak in python.\n";
+        cout << "Simulating memory leak in c++.\n";
         leak_mem();
     }
     return 0;
