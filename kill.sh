@@ -11,9 +11,13 @@
 #           Continue
 
 
-container_id=$(sudo docker ps | grep "memleaks" | awk '{ print $1 }')
+CONTAINER_ID=$(sudo docker ps | grep "memleaks" | awk '{ print $1 }') 
 while true 
 do
-    `sudo docker stats ${container_id} | awk '{ print $4 }'` >  temp.txt
-     break
+    VAL=$(sudo docker stats ${CONTAINER_ID} --no-stream | awk '{ print $4 }' | tail -1 | tr -d 'MiB' | awk '{print int($1)}')
+    if [ $VAL -gt 50 ]
+    then
+        `sudo docker stop ${CONTAINER_ID}`
+        break
+    fi
 done
